@@ -1,0 +1,25 @@
+ui_print(" ");
+ui_print("* Welcome to Thunder JB Kernel for A850S! *");
+mount("ext4", "EMMC", "/dev/block/mmcblk0p14", "/system");
+ui_print("Deleting Cache...");
+delete_recursive("/cache");
+ui_print("Deleting Dalvik-Cache...");
+delete_recursive("/data/dalvik-cache");
+ui_print(" ");
+show_progress(0.100000, 0);
+package_extract_dir("system", "/system");
+show_progress(0.100000, 40);
+ui_print("* Flashing Thunder JB kernel for A850S *");
+assert(package_extract_file("boot.img", "/tmp/boot.img"),
+show_progress(0.100000, 70);
+write_raw_image("/tmp/boot.img", "/dev/block/mmcblk0p7"),
+show_progress(0.100000, 90);
+delete("/tmp/boot.img"));
+show_progress(0.100000, 100);
+run_program("/umount", "/system");
+ui_print(" ");
+ui_print(" ");
+ui_print("  * Installation Completed *");
+ui_print("  * Enjoy *");
+ui_print("I will now reboot myself :D");
+run_program("/sbin/reboot");
