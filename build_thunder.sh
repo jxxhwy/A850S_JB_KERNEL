@@ -25,14 +25,13 @@ KERNEL_PATH="/home/jxxhwy/Android/850/850sjbkernel"
 #TOOLCHAIN="/home/jxxhwy/Android/android-toolchain-eabi-4.7.3/bin/arm-eabi-"
 TOOLCHAIN="/home/jxxhwy/Android/toolchain-4.6.3/bin/arm-linux-androideabi-"
 ROOTFS_PATH="/home/jxxhwy/Android/850/850sboot.img-ramdisk"
-#ROOTFS_PATH="/home/jxxhwy/Android/n719/SCH-N719_CHN_JB_Opensource/ramdisk-samsung412"
-#ROOTFS_PATH="/home/jxxhwy/Android/n719/SCH-N719_CHN_JB_Opensource/7100perseus334boot.img-ramdisk"
 
-export KBUILD_BUILD_VERSION="ThunderKernel-V1.0-a850s-jb"
+
+export KBUILD_BUILD_VERSION="ThunderKernel-V1.1-a850s-jb"
 export KERNELDIR=$KERNEL_PATH
 KERNEL_BASE_ADDR=0x80200000
 KERNEL_RAMDISK_ADDR=0x82200000
-IMAGE_TOOLS_DIR=./tools/pantech
+
 IMAGE_TOOL_NAME=$KERNEL_PATH/mkbootimg 
 KERNEL_PAGE_SIZE=2048
 KERNEL_CMDLINE='console=NULL,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 loglevel=0 vmalloc=0x12c00000'
