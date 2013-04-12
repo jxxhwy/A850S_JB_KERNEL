@@ -21,9 +21,9 @@ TOP_DIR=$PWD
 KERNEL_PATH="/home/jxxhwy/Android/850/850sjbkernel"
 
 # Set toolchain and root filesystem path
-TOOLCHAIN="/home/jxxhwy/Android/android_prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-"
+#TOOLCHAIN="/home/jxxhwy/Android/android_prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-"
 #TOOLCHAIN="/home/jxxhwy/Android/android-toolchain-eabi-4.7.3/bin/arm-eabi-"
-#TOOLCHAIN="/home/jxxhwy/Android/toolchain-4.6.3/bin/arm-linux-androideabi-"
+TOOLCHAIN="/home/jxxhwy/Android/toolchain-4.6.3/bin/arm-linux-androideabi-"
 ROOTFS_PATH="/home/jxxhwy/Android/850/850sboot.img-ramdisk"
 #ROOTFS_PATH="/home/jxxhwy/Android/n719/SCH-N719_CHN_JB_Opensource/ramdisk-samsung412"
 #ROOTFS_PATH="/home/jxxhwy/Android/n719/SCH-N719_CHN_JB_Opensource/7100perseus334boot.img-ramdisk"
@@ -65,7 +65,7 @@ cp boot.img $KERNEL_PATH/releasetools/zip
 
 rm $KERNEL_PATH/releasetools/zip/*.zip
 
-# Creating flashable zip and tar
+# Creating flashable zip
 cd $KERNEL_PATH
 cd releasetools/zip
 zip -0 -r $KBUILD_BUILD_VERSION.zip *

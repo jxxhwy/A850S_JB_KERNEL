@@ -351,7 +351,7 @@ CC		= $(srctree)/scripts/gcc-wrapper.py $(REAL_CC)
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
-CFLAGS_MODULE   =
+CFLAGS_MODULE   = -fno-pic
 AFLAGS_MODULE   =
 LDFLAGS_MODULE  =
 CFLAGS_KERNEL	=
@@ -372,6 +372,19 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
+                   -fmodulo-sched -fmodulo-sched-allow-regmoves \
+		   -pipe \
+		   -ffast-math \
+		   -ftree-vectorize \
+		   -mfpu=neon \
+		   -mfpu=vfp3 \
+		   -marm -march=armv7-a \
+		   -mtune=cortex-a9 \
+		   -fsched-spec-load \
+		   -mfloat-abi=softfp \
+		   -funswitch-loops -fpredictive-commoning -fgcse-after-reload \
+		   -fipa-cp-clone \
+		   -Wno-array-bounds \
 		   -fno-delete-null-pointer-checks
 #// 20120105, albatros, imei 주소값의 공용으로 사용을 위해서
 ifeq ($(OEM_PRODUCT_MANUFACTURER),PANTECH)
@@ -996,6 +1009,7 @@ endif
 prepare2: prepare3 outputmakefile asm-generic
 
 prepare1: prepare2 include/linux/version.h include/generated/utsrelease.h \
+                   include/generated/kernelversion.h \
                    include/config/auto.conf
 	$(cmd_crmodverdir)
 
@@ -1028,11 +1042,18 @@ define filechk_version.h
 	echo '#define KERNEL_VERSION(a,b,c) (((a) << 16) + ((b) << 8) + (c))';)
 endef
 
+define filechk_kernelversion.h
+	(echo \#define KERNELVERSION \"$(KERNELVERSION)\";)
+endef
+
 include/linux/version.h: $(srctree)/Makefile FORCE
 	$(call filechk,version.h)
 
 include/generated/utsrelease.h: include/config/kernel.release FORCE
 	$(call filechk,utsrelease.h)
+
+include/generated/kernelversion.h: $(srctree)/Makefile FORCE
+	$(call filechk,kernelversion.h)
 
 PHONY += headerdep
 headerdep:
